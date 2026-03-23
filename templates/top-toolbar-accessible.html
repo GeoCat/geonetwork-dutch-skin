@@ -1,35 +1,35 @@
 <div data-ng-class="fluidHeaderLayout ? 'container-fluid' : 'container'">
   <div class="navbar-header">
     <a
-      class="hidden-sm hidden-md hidden-lg pull-left gn-logo-link"
-      data-gn-active-tb-item="{{gnCfg.mods.home.appUrl}}"
-      data-ng-hide="{{gnCfg.mods.header.isLogoInHeader}}"
+            class="hidden-sm hidden-md hidden-lg pull-left gn-logo-link"
+            data-gn-active-tb-item="{{gnCfg.mods.home.appUrl}}"
+            data-ng-hide="{{gnCfg.mods.header.isLogoInHeader}}"
     >
       <img
-        class="gn-logo"
-        alt="{{'siteLogoFor' | translate}}{{info['node/name'] || info['system/site/name']}}"
-        data-ng-src="{{gnUrl}}../images/logos/{{info['node/id'] || info['system/site/siteId']}}.png?random{{info['system/site/lastUpdate']}}"
+              class="gn-logo"
+              alt="{{'siteLogo' | translate}}"
+              data-ng-src="{{gnUrl}}../images/logos/{{info['node/id'] || info['system/site/siteId']}}.png?random{{info['system/site/lastUpdate']}}"
       />
     </a>
     <a
-      class="hidden-xs hidden-sm hidden-md hidden-lg btn btn-link pull-left"
-      data-gn-active-tb-item="{{gnCfg.mods.home.appUrl}}"
+            class="hidden-sm hidden-md hidden-lg btn btn-link pull-left"
+            data-gn-active-tb-item="{{gnCfg.mods.home.appUrl}}"
     >
       <span
-        class="gn-name"
-        data-ng-class="authenticated && user.isEditorOrMore() ? 'gn-truncate' : ''"
-        title="{{info['system/site/name']}}"
-        >{{info['node/name'] || info['system/site/name']}}</span
+              class="gn-name"
+              data-ng-class="authenticated && user.isEditorOrMore() ? 'gn-truncate' : ''"
+              title="{{info['system/site/name']}}"
+      >{{info['node/name'] || info['system/site/name']}}</span
       >
     </a>
     <button
-      type="button"
-      class="navbar-toggle collapsed"
-      data-toggle="collapse"
-      data-target="#navbar"
-      title="{{'toggleNavigation' | translate}}"
-      aria-expanded="false"
-      aria-controls="navbar"
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            title="{{'toggleNavigation' | translate}}"
+            aria-expanded="false"
+            aria-controls="navbar"
     >
       <span class="sr-only" data-translate>toggleNavigation</span>
       <span class="icon-bar"></span>
@@ -39,28 +39,201 @@
   </div>
   <div id="navbar" class="navbar-accessible navbar-collapse collapse">
     <ul class="nav navbar-nav gn-menu-xs" role="menu">
-      <li data-ng-repeat-start="menu in toolbarMenu"></li>
-      <li data-ng-if="menu == 'gn-site-name-menu'" gn-site-name-menu-dutch=""></li>
-      <li data-ng-if="menu == 'gn-portal-switcher'" gn-portal-switcher=""></li>
-      <li data-ng-if="menu == 'gn-search-menu'" gn-search-menu=""></li>
-      <li data-ng-if="menu == 'gn-map-menu'" gn-map-menu=""></li>
-      <li data-ng-if="menu == 'gn-contribute-menu'" gn-contribute-menu=""></li>
-      <li data-ng-if="menu == 'gn-admin-menu'" gn-admin-menu=""></li>
       <li
-        data-ng-if="isPage(menu)"
-        gn-static-page-menu="menu"
-        language="{{lang}}"
-        section="top"
-      ></li>
-      <ul
-        data-ng-if="menu == 'gn-static-pages-list-viewer'"
-        gn-static-pages-list-viewer=""
-        language="{{lang}}"
-        section="top"
-        class="nav navbar-nav gn-menu-xs"
-      ></ul>
-      <li data-ng-repeat-end=""></li>
+              class="clearfix hidden-xs"
+              data-ng-if="gnCfg.mods.home.enabled"
+              role="menuitem"
+      >
+        <a
+                class="pull-left gn-logo-link"
+                data-gn-active-tb-item="{{gnCfg.mods.home.appUrl}}"
+        >
+          <img
+                  class="gn-logo"
+                  data-ng-hide="{{gnCfg.mods.header.isLogoInHeader}}"
+                  alt="{{'siteLogo' | translate}}"
+                  data-ng-src="{{gnUrl}}../images/logos/{{info['node/id'] || info['system/site/siteId']}}.png?random{{info['system/site/lastUpdate']}}"
+          />
+          <i class="fa fa-fw fa-home hidden-sm"></i>
+          <span
+                  class="gn-name gn-margin-left hidden-sm"
+                  data-ng-if="gnCfg.mods.header.showGNName"
+                  data-ng-class="authenticated && user.isEditorOrMore() ? 'gn-truncate' : ''"
+                  title="{{'Home' | translate}}"
+                  data-translate=""
+          >Home</span
+          >
+        </a>
+      </li>
+      <li gn-portal-switcher="" role="menuitem"></li>
+      <li
+              class="gn-menuitem-xs"
+              data-ng-if="gnCfg.mods.search.enabled"
+              role="menuitem"
+      >
+        <a
+                data-gn-active-tb-item="{{gnCfg.mods.search.appUrl}}"
+                title="{{'search' | translate}}"
+        >
+          <span class="fa fa-fw fa-search hidden-sm"></span>
+          <span translate>search</span>
+        </a>
+      </li>
+      <li
+              class="gn-menuitem-xs"
+              data-ng-if="gnCfg.mods.map.enabled"
+              role="menuitem"
+      >
+        <a
+                data-gn-active-tb-item="{{isExternalViewerEnabled ? externalViewerUrl : gnCfg.mods.map.appUrl}}"
+                title="{{'map' | translate}}"
+        >
+          <span class="fa fa-fw fa-globe hidden-sm"></span>
+          <span translate>makeYourMap</span>
+          <span data-gnv-layer-indicator="viewer"></span>
+        </a>
+      </li>
+      <li
+              class="dropdown gn-clear-xs"
+              data-ng-if="gnCfg.mods.editor.enabled"
+              data-ng-show="authenticated && user.isEditorOrMore()"
+              id="gn-login-dropdown"
+              role="menuitem"
+      >
+        <a
+                title="{{'editorBoard' | translate}}"
+                href
+                class="dropdown-toggle gn-menuheader-xs"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+        >
+          <span class="fa fa-fw fa-pencil hidden-xs"></span>
+          <span translate>contribute</span>
+          <span class="caret hidden-xs"></span>
+        </a>
+        <ul class="dropdown-menu gn-menu-xs clearfix" role="menu">
+          <li class="gn-menuitem-xs" role="menuitem">
+            <a data-gn-active-tb-item="{{gnCfg.mods.editor.appUrl}}#/board">
+              <span class="fa fa-fw fa-bars"></span
+              ><span translate>editorHome</span>
+            </a>
+          </li>
+          <li role="separator" class="divider gn-separator-xs"></li>
+          <li class="gn-menuitem-xs" role="menuitem">
+            <a data-gn-active-tb-item="{{gnCfg.mods.editor.appUrl}}#/create">
+              <span class="fa fa-fw fa-plus"></span>&nbsp;<span translate
+            >addRecord</span
+            >
+            </a>
+          </li>
+          <li
+                  class="gn-menuitem-xs"
+                  role="menuitem"
+                  data-ng-if="user.canImportMetadata()"
+          >
+            <a data-gn-active-tb-item="{{gnCfg.mods.editor.appUrl}}#/import">
+              <span class="fa fa-fw fa-upload"></span
+              ><span translate>ImportRecord</span>
+            </a>
+          </li>
+          <li class="gn-menuitem-xs" role="menuitem">
+            <a data-gn-active-tb-item="{{gnCfg.mods.editor.appUrl}}#/directory">
+              <span class="fa fa-fw fa-bookmark"></span
+              ><span translate>directoryManager</span>
+            </a>
+          </li>
+          <li class="gn-menuitem-xs" role="menuitem">
+            <a data-gn-active-tb-item="{{gnCfg.mods.editor.appUrl}}#/batchedit">
+              <span class="fa fa-fw fa-pencil"></span
+              ><span translate>batchEditing</span>
+            </a>
+          </li>
+          <li
+                  class="gn-menuitem-xs"
+                  role="menuitem"
+                  ng-if="user.isAdministratorOrMore() && healthCheck.IndexHealthCheck === true"
+          >
+            <a
+                    data-gn-active-tb-item="{{gnCfg.mods.editor.appUrl}}#/accessManager"
+            >
+              <span class="fa fa-fw fa-lock"></span>
+              <span data-translate="">accessManager</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li
+              data-ng-if="gnCfg.mods.admin.enabled"
+              class="dropdown"
+              data-ng-show="user.isUserAdminOrMore()"
+              role="menuitem"
+      >
+        <a
+                title="{{'adminConsole' | translate}}"
+                href
+                class="dropdown-toggle gn-menuheader-xs"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+        >
+          <span class="fa fa-fw fa-wrench hidden-xs"></span>
+          <span translate>adminConsole</span>
+          <span class="caret hidden-xs"></span>
+        </a>
+        <ul data-ng-if="user.isUserAdmin()" class="dropdown-menu gn-menu-xs">
+          <li class="gn-menuitem-xs" role="menuitem">
+            <a data-gn-active-tb-item="admin.console#/home">
+              <span class="fa fa-fw fa-th"></span
+              ><span translate>adminHome</span>
+            </a>
+          </li>
+          <li role="separator" class="divider gn-separator-xs"></li>
+          <li
+                  class="gn-menuitem-xs"
+                  role="menuitem"
+                  data-ng-repeat="t in userAdminMenu"
+          >
+            <a data-gn-active-tb-item="admin.console{{t.route}}">
+              <span class="fa fa-fw {{t.icon}}"></span
+              ><span translate>{{t.name | translate}}</span>
+            </a>
+          </li>
+        </ul>
+        <ul
+                data-ng-if="user.isAdministrator()"
+                class="dropdown-menu gn-menu-xs"
+        >
+          <li class="gn-menuitem-xs" role="menuitem">
+            <a data-gn-active-tb-item="admin.console#/home">
+              <span class="fa fa-fw fa-th"></span
+              ><span translate>adminHome</span>
+            </a>
+          </li>
+          <li role="separator" class="divider gn-separator-xs"></li>
+          <li
+                  class="gn-menuitem-xs"
+                  role="menuitem"
+                  data-ng-repeat="t in adminMenu"
+          >
+            <a data-gn-active-tb-item="{{gnCfg.mods.admin.appUrl}}{{t.route}}">
+              <span class="fa fa-fw {{t.icon}}"></span
+              ><span translate>{{t.name | translate}}</span>
+            </a>
+          </li>
+        </ul>
+      </li>
     </ul>
+
+    <ul
+            class="nav navbar-nav gn-menu-xs"
+            role="menu"
+            gn-static-pages-list-viewer
+            data-section="menu"
+            data-language="{{lang}}"
+            role="menuitem"
+    ></ul>
 
     <div class="navbar-right">
       <ul gn-signin-menu=""></ul>

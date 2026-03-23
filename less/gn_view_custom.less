@@ -1,1 +1,309 @@
-//// place here styles that can override everything else
+// place here styles that can override everything else
+
+// ----------------------------------------------------------------------
+// NGR CUSTOMIZATION
+// ----------------------------------------------------------------------
+
+// metadata page
+.gn-md-view {
+  .gn-metadata-display {
+    .gn-record {
+      .gn-related-resources {
+        // hide WFS add to map button
+        .gn-relation-type-WFS {
+          [data-gn-record-links-button] {
+            display: none;
+          }
+        }
+        // WFS download button in the right column
+        .gn-related-type-wfs {
+          p {
+            //display: none;
+          }
+          .btn-group {
+            width: 100%;
+            .btn {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// BEGIN - to be removed after updating to the latest Dutch view
+
+// nav bar
+.navbar-default {
+  .navbar-nav {
+    li:has(.active) {
+      color: @gn-color;
+      background-color: @gn-menubar-background-active;
+    }
+
+    @media (min-width: @screen-sm-min) {
+      .fa {
+        display: none !important;
+      }
+    }
+  }
+
+
+
+  .btn-link {
+    color: @gn-menubar-color;
+  }
+  .signin-dropdown {
+    .dropdown-menu {
+      .fa {
+        display: inline-block !important;
+      }
+    }
+  }
+
+  @media (max-width: @screen-xs-max) {
+    .signin-dropdown {
+      .navbar-form {
+        width: 100%;
+        li:not(.divider) {
+          padding: 3px 0;
+        }
+      }
+      .dropdown-toggle {
+        color: @gn-menubar-color-active;
+
+        .caret {
+          display: none;
+        }
+      }
+    }
+    .language-switcher {
+      padding: 0;
+      .gn-menuheader-xs {
+        display: none !important;
+      }
+    }
+    [gn-static-pages-list-viewer] {
+      margin-top: 5px;
+      > li > a {
+        color: @gn-menubar-color-active;
+      }
+    }
+    .username-dropdown {
+      .gn-menuitem-xs {
+        color: @gn-menubar-color-active;
+      }
+      .gn-user-info {
+        margin: 0;
+        .gn-user-role {
+          color: @gn-menubar-color-active;
+        }
+      }
+    }
+    .gn-forgot-details {
+      padding: 10px 0 !important;
+    }
+  }
+}
+
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  .gn-top-bar .container .gn-logo-link .gn-name, .gn-top-bar .container-fluid .gn-logo-link .gn-name {
+    &.hidden-sm {
+      display: inline-block !important;
+    }
+  }
+}
+
+// search
+.gn-top-search {
+  @media (max-width: @screen-xs-max) {
+    .col-md-4, .col-md-2 {
+      //padding-left: 15px !important;
+    }
+  }
+
+  @media (max-width: @screen-sm-max) {
+    .gn-form-any {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+// main
+.gn-row-main {
+  @media (max-width: @screen-sm-max) {
+    .col-md-5, .col-md-2 {
+      padding-right: 0;
+    }
+  }
+
+}
+
+.gn-search-page {
+  [data-ng-search-form] .gn-top-search {
+    .gn-search-filter {
+      a,
+      .btn-link {
+        color: @gn-menubar-color-active;
+        @media (max-width: @screen-md-min) {
+          color: @gn-menubar-color;
+          span {
+            color: @gn-menubar-color;
+          }
+        }
+        &:hover,
+        &:active {
+          color: @gn-menubar-color-active;
+        }
+      }
+    }
+    .gn-search-filter-datepicker {
+      .btn-link {
+        color: @gn-menubar-color-active;
+        span {
+          color: @gn-menubar-color-active;
+        }
+      }
+      .dropdown-menu {
+        a {
+          color: @gn-menubar-color-active;
+        }
+      }
+    }
+  }
+}
+@media (max-width: @screen-sm-max) {
+  .gn-search-page [data-ng-search-form] .gn-top-search .gn-search-filter .gn-search-filter-datepicker [class*="col-md"] {
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 5px;
+  }
+}
+@media (max-width: @screen-sm-max) {
+  .gn-search-page [data-ng-search-form] .gn-top-search .gn-nopadding-left {
+    padding-left: 15px !important;
+  }
+}
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+  .gn-search-page [data-ng-search-form] .gn-top-search .gn-nopadding-left {
+    padding-left: 0 !important;
+  }
+}
+
+
+// login
+[ng-app="gn_login"] {
+  .navbar-toggle {
+    margin-top: 0;
+  }
+
+  .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .active > a:focus {
+    color: @gn-menubar-color-active;
+    background-color: @gn-menubar-background-active;
+  }
+
+  @media (max-width: @screen-xs-max) {
+    .navbar-default .gn-menu-xs .gn-menuitem-xs a {
+      color: @gn-menubar-color;
+
+      &:hover, &:focus {
+        color: @gn-menubar-color-active;
+      }
+    }
+
+    .navbar-default .gn-menuheader-xs span {
+      color: @gn-menubar-color;
+
+      &:hover, &:focus {
+        color: @gn-menubar-color-active;
+      }
+    }
+
+    .navbar-default .username-dropdown .gn-menuitem-xs {
+      color: @gn-menubar-color;
+
+      &:hover, &:focus {
+        color: @gn-menubar-color-active;
+      }
+    }
+
+    .navbar-default .btn-link {
+      color: @gn-menubar-color;
+
+      &:hover, &:focus {
+        color: @gn-menubar-color;
+      }
+    }
+  }
+}
+
+// END - to be removed after updating to the latest Dutch view
+
+
+// import records
+#gn-import-mode-uploadurl-row, #gn-import-mode-copypaste-row {
+  display: none;
+}
+.navbar-nav {
+  .dropdown {
+    a[href*="batchedit"], a[href*="accessManager"] {
+      display: none;
+    }
+    .gn-menuitem-xs {
+      &:has([href*="batchedit"]) {
+        display: none;
+      }
+      &:has([href*="accessManager"]) {
+        display: none;
+      }
+    }
+  }
+}
+
+//hide csw transform on harvest
+#gn-harvest-settings-csw-advanced-xsl-row {
+  display: none;
+}
+//hide directory menu
+li#gn-login-dropdown li:nth-child(5) {
+  display: none;
+}
+//max-height for textarea inside table
+.table textarea {
+  max-height: 80px;
+}
+//hide nil reason fields
+div[id*="gcoCOLONnilReason"] {
+  display: none;
+}
+// hide add nil reason buttons
+[id*="gn-attr-add-button-gcoCOLONnilReason"] {
+  display: none;
+}
+
+//hide date type pull down
+.gn-date div.input-group-btn {
+  display: none;
+}
+
+//primary should have more contrast
+.btn-primary {
+  color: #fff;
+  background-color: #14173c !important;
+  border-color: #0d0f29 !important;
+}
+//hide wfs in add services
+.layerTree[gn-wms-import="wfs"] {
+  display: none;
+}
+//fix the feedback button
+.md-feedback a {
+  background-color: #0075b3 !important;
+}
+.top-menu li {
+  list-style: none;
+  float: right;
+  padding: 5px;
+}
+// NGR end
